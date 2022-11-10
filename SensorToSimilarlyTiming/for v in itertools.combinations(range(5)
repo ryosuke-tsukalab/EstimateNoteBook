@@ -1,0 +1,25 @@
+for v in itertools.combinations(range(5), 4):
+    study_datas = []
+    study_rule_length_lists = []
+    study_accuracy_lists = []
+    data_name = ''
+    for num in v:
+        study_datas.append(v_m_d_list[num])
+        study_rule_length_lists.append(rule_length_lists[num])
+        study_accuracy_lists.append(accuracy_lists[num])
+        data_name += list_name[num] + '_'
+    # group_max_list, group_max_accuracy, each_max_result_list, each_max_part_list, each_max_accuracy = create_group_rule(study_datas, study_rule_length_lists, study_accuracy_lists)
+    group_max_list, group_max_accuracy, each_max_result_list, each_max_part_list, each_max_accuracy = group_df_to_list(pd.read_csv(f'{data_name}df.csv', header=0, encoding='cp932'))
+    for i in range(len(group_max_accuracy)):
+        if group_max_accuracy[i] < group_max_accuracy[0]:
+            max_accuracy_len = i
+            break
+    exception_num = [i for i in range(5) if not i in v][0]
+    e_num = exception_num
+    print(f'評価されるルール群:{data_name}, 評価するデータ:{list_name[e_num]}')
+    print(each_max_accuracy[:10])
+    eval_max_list, eval_max_accuracy, eval_max_result_list, eval_max_part_list, be_evaluated_list = evaluate_rule(v_m_d_list[e_num][0], v_m_d_list[e_num][1], v_m_d_list[e_num][2], group_max_list[:max_accuracy_len], rule_length_lists[e_num], accuracy_lists[e_num], group_max_accuracy[:max_accuracy_len])
+    # pickUpData(eval_max_list, eval_max_accuracy, eval_max_result_list, accuracy_lists[e_num], be_evaluated_list)
+    print('#######################################################')
+    
+    f'{data_name}df.csv'
