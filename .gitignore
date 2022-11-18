@@ -1,2 +1,4 @@
 /SensorToSimilarlyTiming/data/*
-/SimilarTimingToEstimeatePart/*.csv
+/SimilarTimingToEstimatePart/*.csv
+/SimilarTimingToEstimatePart/datas/*
+/data/*
